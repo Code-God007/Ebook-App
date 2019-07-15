@@ -1,0 +1,48 @@
+<section class="py-2">
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <h1 class="display-3 mt-3 pt-5">
+                Web Development Ebook
+            </h1>
+            <p class="lead">learn web development front-to-back</p>
+            <button
+                style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+                id="checkout-button-sku_FQfy7uQN22Edz2" role="link">
+                Checkout
+            </button>
+
+            <div id="error-message"></div>
+        </div>
+        <div class="col-md-6">
+            <img src="/img/book.png" alt="" class="img-fluid">
+        </div>
+    </div>
+</section>
+<script>
+    var stripe = Stripe('pk_test_f3624whEqit0seHBH4tUFj7z00NIctLWOQ');
+
+    var checkoutButton = document.getElementById('checkout-button-sku_FQfy7uQN22Edz2');
+    checkoutButton.addEventListener('click', function () {
+        // When the customer clicks on the button, redirect
+        // them to Checkout.
+        stripe.redirectToCheckout({
+            items: [{ sku: 'sku_FQfy7uQN22Edz2', quantity: 1 }],
+
+            // Do not rely on the redirect to the successUrl for fulfilling
+            // purchases, customers may not always reach the success_url after
+            // a successful payment.
+            // Instead use one of the strategies described in
+            // https://stripe.com/docs/payments/checkout/fulfillment
+            successUrl: 'http://localhost:5000/success',
+            cancelUrl: 'http://localhost:5000/canceled',
+        })
+            .then(function (result) {
+                if (result.error) {
+                    // If `redirectToCheckout` fails due to a browser or network
+                    // error, display the localized error message to your customer.
+                    var displayError = document.getElementById('error-message');
+                    displayError.textContent = result.error.message;
+                }
+            });
+    });
+</script>
