@@ -33,8 +33,8 @@
             // a successful payment.
             // Instead use one of the strategies described in
             // https://stripe.com/docs/payments/checkout/fulfillment
-            successUrl: 'http://localhost:5000/success',
-            cancelUrl: 'http://localhost:5000/canceled',
+            successUrl: 'https://afternoon-harbor-81526.herokuapp.com/success',
+            cancelUrl: 'https://afternoon-harbor-81526.herokuapp.com/canceled',
         })
             .then(function (result) {
                 if (result.error) {
