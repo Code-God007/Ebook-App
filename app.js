@@ -1,5 +1,4 @@
 const express = require("express");
-const stripe = require("stripe")("sk_test_JkUNOIZqEpsMCIwxjrpRSkF800YtnPa3pX");
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
 
